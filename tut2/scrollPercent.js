@@ -6,19 +6,45 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { TWEEN } from "three/examples/jsm/libs/tween.module.min";
 
 export function scrollPercent() {
+    var first = document.getElementById('heading1')
+    var bounding = first.getBoundingClientRect();
+
+    var second = document.getElementById('vid')
+    var bounding2 = second.getBoundingClientRect();
+
+     var third = document.getElementById('competitionsHeading')
+    var bounding3 = third.getBoundingClientRect();
+   
+    var fourth = document.getElementById('speaker')
+    var bounding4 = fourth.getBoundingClientRect();
+
+    var fifth = document.getElementById('workshops')
+    var bounding5 = fifth.getBoundingClientRect();
+
+    var sixth = document.getElementById('sixth')
+
+
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+
+
+
+
     let scrollPercent = 0
 
-    document.getElementById("parentCont").onscroll = () => {
-        //calculate the current scroll progress as a percentage
-        scrollPercent =
-            ((document.getElementById("parentCont").scrollTop) /
-                ((4236)//2824
-                    -
-                    document.getElementById("parentCont").clientHeight)) *
-            100
-            ; (document.getElementById('scrollProgress')).innerText =
-                'Scroll Progress : ' + scrollPercent.toFixed(2)
-    }
+    var p = document.getElementById("parentCont").clientHeight
+    p=706
+    console.log(706)
+    var y = 6 * p
+   
 
 
     let scroll = 0;
@@ -113,256 +139,318 @@ export function scrollPercent() {
     let x = window.innerWidth;
     let animationScripts = []
 
-    function loop() {
 
-        mesh.rotation.x += 0.0001
-        mesh.rotation.y = 0.001
+    let m,n;
+    
+    document.getElementById("parentCont").onscroll = () => {
+        if (isInViewport(first)) {
 
-        renderer.render(scene, camera)
-        window.requestAnimationFrame(loop)
+            console.log('Element 1 is in the viewport!');
+            m=0;
+            n=25;
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(0, -4, 0), 0.15)
+            }})
+            console.log(m,n)
 
-    }
+        } 
+        if (isInViewport(second)) {
 
-    if (x > 600) {
+            console.log('Element 2 is in the viewport!');
+            m=26;
+            n=45;   console.log(m,n)
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.09)
+            }})
+        } 
 
-        animationScripts.push({
-            start: 0,
-            end: 22.24,
-            func: () => {
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                if (scroll == 0) {
-                    mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-                }
-                else {
-                    mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-                }
-            },
-        })
+        if (isInViewport(third)) {
 
+            console.log('Element 3 is in the viewport!');
+            m=46;
+            n=65;   console.log(m,n)
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.09)
+            }})
+        } 
+    
+        if (isInViewport(fourth)) {
 
+            console.log('Element 4 is in the viewport!');
+            m=66;
+            n=85;   console.log(m,n)
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(9, 1, 0), 0.09)
+            }})
+        } 
+        if (isInViewport(fifth)) {
 
-        animationScripts.push({
-            start: 22.24,
-            end: 43.11,
-
-            func: () => {
-                if (scroll == 0) {
-                    mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
-                }
-                // mesh.position.y=-4
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-
-                else {
-                    mesh.position.lerp(new THREE.Vector3(0, -6, 0), 0.05)
-                }
-
-
-
-
-            }
-        })
-
-
-        animationScripts.push({
-            start: 43.12,
-            end: 64.44,
-            func: () => {
-
-                if (scroll == 0) {
-                    mesh.position.lerp(new THREE.Vector3(+9, 1, 0), 0.05)
-
-                }
-                else {
-                    mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
-                }
-                // mesh.position.x=-9
-                // mesh.position.y=1
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-
-                // mesh.position.y=0.5
-                // mesh.position.x=-9
-
-                //console.log(camera.position.x + " " + camera.position.y)
-            },
-        })
-        animationScripts.push({
-            start: 64.45,
-            end: 85.77,
-            func: () => {
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                if (scroll == 0) {
-                    mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
-                }
-
-                else {
-                    mesh.position.lerp(new THREE.Vector3(9, 1, 0), 0.05)
-                }
-            },
-        })
-        animationScripts.push({
-            start: 85.78,
-            end: 105.72,
-            func: () => {
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                if (scroll == 0) {
-                    console.log(scroll)
-                    mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-                }
-                else if (scroll == 1) {
-                    console.log(scroll)
-                    mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
-                }
-
-            },
-        })
-        // upAnimationScripts.push({
-        //     start: 105.72,
-        //     end: 85.78,
-        //     func: () => {
-        //         // mesh.position.x=0
-        //         // mesh.position.y=-5
-        //         // //console.log(cube.position.z)
-        //         // targetPosition=mesh.position.clone()
-        //         // rotate2(targetPosition)
-        //         mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-
-        //     },
-        // })
-        // upAnimationScripts.push({
-        //     start: 85.78,
-        //     end:64.45,
-        //     func: () => {
-        //         // mesh.position.x=0
-        //         // mesh.position.y=-5
-        //         // //console.log(cube.position.z)
-        //         // targetPosition=mesh.position.clone()
-        //         // rotate2(targetPosition)
-        //         mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
-
-        //     },
-        // })
-        // upAnimationScripts.push({
-        //     start: 64.45,
-        //     end:43.12,
-        //     func: () => {
-        //         // mesh.position.x=0
-        //         // mesh.position.y=-5
-        //         // //console.log(cube.position.z)
-        //         // targetPosition=mesh.position.clone()
-        //         // rotate2(targetPosition)
-        //         mesh.position.lerp(new THREE.Vector3(18, 1, 0), 0.05)
-
-        //     },
-        // })
-    }
-    if (x < 600) {
-        camera.position.z = 25
-        animationScripts.push({
-            start: 0,
-            end: 22.24,
-            func: () => {
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-                camera.position.z = 20
-            },
-        })
-
-
-
-        animationScripts.push({
-            start: 22.24,
-            end: 43.12,
-
-            func: () => {
-                camera.position.z = 24
-                mesh.position.lerp(new THREE.Vector3(2, 3.5, 0), 0.05)
-                // mesh.position.y=-4
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-
-
-
-
-
-
-            }
-        })
-
-
-        animationScripts.push({
-            start: 43.12,
-            end: 64.45,
-            func: () => {
-                camera.position.z = 25
-                mesh.position.lerp(new THREE.Vector3(-2, 3, 0), 0.05)
-
-
-                // mesh.position.x=-9
-                // mesh.position.y=1
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-
-                // mesh.position.y=0.5
-                // mesh.position.x=-9
-
-                //console.log(camera.position.x + " " + camera.position.y)
-            },
-        })
-        animationScripts.push({
-            start: 64.45,
-            end: 85.78,
-            func: () => {
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                camera.position.z = 25
-                mesh.position.lerp(new THREE.Vector3(2, 3.5, 0), 0.05)
-            },
-        })
-        animationScripts.push({
-            start: 85.78,
-            end: 105.72,
-            func: () => {
-                camera.position.z = 20
-                // mesh.position.x=0
-                // mesh.position.y=-5
-                // //console.log(cube.position.z)
-                // targetPosition=mesh.position.clone()
-                // rotate2(targetPosition)
-                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
-
-            },
-        })
+            console.log('Element 5 is in the viewport!');
+            m=86;
+            n=105;   console.log(m,n)
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(-10, 1, 0), 0.09)
+            }})
+        }
+        if(isInViewport(sixth)){
+            console.log("Element 6 in the house");
+            animationScripts.push({func(){
+                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.09)
+            }})
+        }
+        
+       
+        //calculate the current scroll progress as a percentage
+        scrollPercent =
+            ((document.getElementById("parentCont").scrollTop) /
+                ((y)//2824
+                    -
+                    706)) *
+            100
+            ; (document.getElementById('scrollProgress')).innerText =
+                'Scroll Progress : ' + scrollPercent.toFixed(2)
     }
 
 
 
+
+    // if (x > 600) {
+
+    //     animationScripts.push({
+    //         start: m,
+    //         end: n,
+    //         func: () => {
+             
+    //             if (m=1 && n==1 && scroll==0) {
+    //                 mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+    //             }
+    //             else {
+    //                 mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+    //             }
+
+    //         },
+    //     })
+
+
+
+    //     animationScripts.push({
+    //         start: m,
+    //         end: n,
+
+    //         func: () => {
+    //             if (scroll == 0) {
+    //                 mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
+    //             }
+    //             // mesh.position.y=-4
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+
+    //             else {
+    //                 mesh.position.lerp(new THREE.Vector3(0, -6, 0), 0.05)
+    //             }
+
+
+
+
+    //         }
+    //     })
+
+
+    //     animationScripts.push({
+    //         start: m,
+    //         end: n,
+    //         func: () => {
+
+    //             if (scroll == 0) {
+    //                 mesh.position.lerp(new THREE.Vector3(+9, 1, 0), 0.05)
+
+    //             }
+    //             else {
+    //                 mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
+    //             }
+    //             // mesh.position.x=-9
+    //             // mesh.position.y=1
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+
+    //             // mesh.position.y=0.5
+    //             // mesh.position.x=-9
+
+    //             //console.log(camera.position.x + " " + camera.position.y)
+    //         },
+    //     })
+    //     animationScripts.push({
+    //         start: m,
+    //         end:n,
+    //         func: () => {
+    //             // mesh.position.x=0
+    //             // mesh.position.y=-5
+    //             // //console.log(cube.position.z)
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+    //             if (scroll == 0) {
+    //                 mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
+    //             }
+
+    //             else {
+    //                 mesh.position.lerp(new THREE.Vector3(9, 1, 0), 0.05)
+    //             }
+    //         },
+    //     })
+    //     animationScripts.push({
+    //         start:m,
+    //         end: n,
+    //         func: () => {
+    //             // mesh.position.x=0
+    //             // mesh.position.y=-5
+    //             // //console.log(cube.position.z)
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+    //             if (scroll == 0) {
+    //                 console.log(scroll)
+    //                 mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+    //             }
+    //             else if (scroll == 1) {
+    //                 console.log(scroll)
+    //                 mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
+    //             }
+
+    //         },
+    //     })}
+    //     // upAnimationScripts.push({
+    //     //     start: 105.72,
+    //     //     end: 85.78,
+    //     //     func: () => {
+    //     //         // mesh.position.x=0
+    //     //         // mesh.position.y=-5
+    //     //         // //console.log(cube.position.z)
+    //     //         // targetPosition=mesh.position.clone()
+    //     //         // rotate2(targetPosition)
+    //     //         mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+
+    //     //     },
+    //     // })
+    //     // upAnimationScripts.push({
+    //     //     start: 85.78,
+    //     //     end:64.45,
+    //     //     func: () => {
+    //     //         // mesh.position.x=0
+    //     //         // mesh.position.y=-5
+    //     //         // //console.log(cube.position.z)
+    //     //         // targetPosition=mesh.position.clone()
+    //     //         // rotate2(targetPosition)
+    //     //         mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.05)
+
+    //     //     },
+    //     // })
+    //     // upAnimationScripts.push({
+    //     //     start: 64.45,
+    //     //     end:43.12,
+    //     //     func: () => {
+    //     //         // mesh.position.x=0
+    //     //         // mesh.position.y=-5
+    //     //         // //console.log(cube.position.z)
+    //     //         // targetPosition=mesh.position.clone()
+    //     //         // rotate2(targetPosition)
+    //     //         mesh.position.lerp(new THREE.Vector3(18, 1, 0), 0.05)
+
+    //     //     },
+    //     // })
+    // }
+    // if (x < 600) {
+    //     camera.position.z = 25
+    //     animationScripts.push({
+    //         start: 0,
+    //         end: 22.24,
+    //         func: () => {
+    //             // mesh.position.x=0
+    //             // mesh.position.y=-5
+    //             // //console.log(cube.position.z)
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+    //             mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+    //             camera.position.z = 20
+    //         },
+    //     })
+
+
+
+    //     animationScripts.push({
+    //         start: 22.24,
+    //         end: 43.12,
+
+    //         func: () => {
+    //             camera.position.z = 24
+    //             mesh.position.lerp(new THREE.Vector3(2, 3.5, 0), 0.05)
+    //             // mesh.position.y=-4
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+
+
+
+
+
+
+    //         }
+    //     })
+
+
+    //     animationScripts.push({
+    //         start: 43.12,
+    //         end: 64.45,
+    //         func: () => {
+    //             camera.position.z = 25
+    //             mesh.position.lerp(new THREE.Vector3(-2, 3, 0), 0.05)
+
+
+    //             // mesh.position.x=-9
+    //             // mesh.position.y=1
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+
+    //             // mesh.position.y=0.5
+    //             // mesh.position.x=-9
+
+    //             //console.log(camera.position.x + " " + camera.position.y)
+    //         },
+    //     })
+    //     animationScripts.push({
+    //         start: 64.45,
+    //         end: 85.78,
+    //         func: () => {
+    //             // mesh.position.x=0
+    //             // mesh.position.y=-5
+    //             // //console.log(cube.position.z)
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+    //             camera.position.z = 25
+    //             mesh.position.lerp(new THREE.Vector3(2, 3.5, 0), 0.05)
+    //         },
+    //     })
+    //     animationScripts.push({
+    //         start: 85.78,
+    //         end: 105.72,
+    //         func: () => {
+    //             camera.position.z = 20
+    //             // mesh.position.x=0
+    //             // mesh.position.y=-5
+    //             // //console.log(cube.position.z)
+    //             // targetPosition=mesh.position.clone()
+    //             // rotate2(targetPosition)
+    //             mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
+
+    //         },
+    //     })
+    // }
+
+
+console.log(animationScripts)
     function playDownScrollAnimations() {
-        animationScripts.forEach((a) => {
-            if (scrollPercent >= a.start && scrollPercent < a.end) {
-                a.func()
 
-            }
+        animationScripts.forEach((a) => {
+
+           a.func()
+
         })
     }
 
@@ -399,6 +487,9 @@ export function scrollPercent() {
 
 
 }
+
+
+
 
 
 /*
