@@ -7,19 +7,15 @@ import { TWEEN } from "three/examples/jsm/libs/tween.module.min";
 
 export function scrollPercent() {
     var first = document.getElementById('heading1')
-    var bounding = first.getBoundingClientRect();
+
 
     var second = document.getElementById('vid')
-    var bounding2 = second.getBoundingClientRect();
 
-     var third = document.getElementById('competitionsHeading')
-    var bounding3 = third.getBoundingClientRect();
-   
+    var third = document.getElementById('competitionsHeading')
+
     var fourth = document.getElementById('speaker')
-    var bounding4 = fourth.getBoundingClientRect();
 
     var fifth = document.getElementById('workshops')
-    var bounding5 = fifth.getBoundingClientRect();
 
     var sixth = document.getElementById('sixth')
 
@@ -39,12 +35,6 @@ export function scrollPercent() {
 
 
     let scrollPercent = 0
-
-    var p = document.getElementById("parentCont").clientHeight
-    p=706
-    console.log(706)
-    var y = 6 * p
-   
 
 
     let scroll = 0;
@@ -128,78 +118,82 @@ export function scrollPercent() {
     let targetPosition = mesh.position.clone();
     console.log(targetPosition)
 
-    function lerp(x, y, a) {
-        return (1 - a) * x + a * y
-    }
 
-    function rotate2(vector) {
-        mesh.position.lerp(vector, smoothness);
-    }
-
-    let x = window.innerWidth;
     let animationScripts = []
 
 
-    let m,n;
-    
+    let m, n;
+
     document.getElementById("parentCont").onscroll = () => {
         if (isInViewport(first)) {
 
-            console.log('Element 1 is in the viewport!');
-            m=0;
-            n=25;
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(0, -4, 0), 0.15)
-            }})
-            console.log(m,n)
+            // console.log('Element 1 is in the viewport!');
+            m = 0;
+            n = 25;
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(0, -4, 0), 0.15)
+                }
+            })
+            console.log(m, n)
 
-        } 
+        }
         if (isInViewport(second)) {
 
-            console.log('Element 2 is in the viewport!');
-            m=26;
-            n=45;   console.log(m,n)
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.09)
-            }})
-        } 
+            // console.log('Element 2 is in the viewport!');
+            m = 26;
+            n = 45; console.log(m, n)
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.09)
+                }
+            })
+        }
 
         if (isInViewport(third)) {
 
-            console.log('Element 3 is in the viewport!');
-            m=46;
-            n=65;   console.log(m,n)
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.09)
-            }})
-        } 
-    
+            // console.log('Element 3 is in the viewport!');
+            m = 46;
+            n = 65; console.log(m, n)
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(-9, 1, 0), 0.09)
+                }
+            })
+        }
+
         if (isInViewport(fourth)) {
 
-            console.log('Element 4 is in the viewport!');
-            m=66;
-            n=85;   console.log(m,n)
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(9, 1, 0), 0.09)
-            }})
-        } 
+            // console.log('Element 4 is in the viewport!');
+            m = 66;
+            n = 85; console.log(m, n)
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(9, 1, 0), 0.09)
+                }
+            })
+        }
         if (isInViewport(fifth)) {
 
-            console.log('Element 5 is in the viewport!');
-            m=86;
-            n=105;   console.log(m,n)
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(-10, 1, 0), 0.09)
-            }})
+            // console.log('Element 5 is in the viewport!');
+            m = 86;
+            n = 105; console.log(m, n)
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(-10, 1, 0), 0.09)
+                }
+            })
         }
-        if(isInViewport(sixth)){
-            console.log("Element 6 in the house");
-            animationScripts.push({func(){
-                mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.09)
-            }})
+        if (isInViewport(sixth)) {
+            // console.log("Element 6 in the house");
+            animationScripts.push({
+                func() {
+                    mesh.position.lerp(new THREE.Vector3(0, -6, 0), 0.09)
+                }
+            })
         }
-        
-       
+
+
         //calculate the current scroll progress as a percentage
         scrollPercent =
             ((document.getElementById("parentCont").scrollTop) /
@@ -220,7 +214,7 @@ export function scrollPercent() {
     //         start: m,
     //         end: n,
     //         func: () => {
-             
+
     //             if (m=1 && n==1 && scroll==0) {
     //                 mesh.position.lerp(new THREE.Vector3(0, -5, 0), 0.05)
     //             }
@@ -444,12 +438,12 @@ export function scrollPercent() {
     // }
 
 
-console.log(animationScripts)
+    console.log(animationScripts)
     function playDownScrollAnimations() {
 
         animationScripts.forEach((a) => {
 
-           a.func()
+            a.func()
 
         })
     }
